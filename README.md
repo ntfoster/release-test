@@ -1,71 +1,58 @@
-![](https://img.shields.io/badge/Foundry-v0.8.6-informational)
-<!--- Downloads @ Latest Badge -->
-<!--- replace <user>/<repo> with your username/repository -->
-<!--- ![Latest Release Download Count](https://img.shields.io/github/downloads/<user>/<repo>/latest/module.zip) -->
+# Optolith to Foundry Importer
+:de: [Auf Deutsch](README-de.md)
 
-<!--- Forge Bazaar Install % Badge -->
-<!--- replace <your-module-name> with the `name` in your manifest -->
-<!--- ![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2F<your-module-name>&colorB=4aa94a) -->
+A module for [Foundry Virtual Tabletop](https://foundryvtt.com/) to import The Dark Eye/Das Schwarze Auge characters from the [Optolith](https://optolith.app/) character creator
 
+This is an early work in progress and there is likely a large number of issues and many feature stills to be implemented. I have not yet tested all possible options in Optolith annd there will be some options that are not supported yet, but the most common ones should hopefully work.
 
-# How to use this Template to create a versioned Release
+Special thanks to the Optolith developers for the translation data!
 
-1. Open your repository's releases page.
+Please submit an issue if you find anything which does not work correctly. If you can include a copy of the console log as well that would be very helpful as well (Open console with F12, go to the Console tab, Right click in the console > Save as).
 
-![Where to click to open repository releases.](https://user-images.githubusercontent.com/7644614/93409301-9fd25080-f864-11ea-9e0c-bdd09e4418e4.png)
+## Installation
 
-2. Click "Draft a new release"
+Use this URL in the 'Manifest URL' box on the Install Module screen:
+```
+https://github.com/ntfoster/optolith-to-foundry/releases/latest/download/module.json
+```
+Remember to activate the module once you have launched a world (Game Settings tab > Manage Modules).
 
-![Draft a new release button.](https://user-images.githubusercontent.com/7644614/93409364-c1333c80-f864-11ea-89f1-abfcb18a8d9f.png)
+## Usage
+If you are logged in as a user with permission to create new Actors, there will be an Import button at the top of the Actors Directory tab.: 
 
-3. Fill out the release version as the tag name.
+![Import button in Actor Directory](docs/actor-import-button.png "Import button in Actor Directory")
 
-If you want to add details at this stage you can, or you can always come back later and edit them.
+This will open a dialog box for you to upload a JSON file from your computer.
 
-![Release Creation Form](https://user-images.githubusercontent.com/7644614/93409543-225b1000-f865-11ea-9a19-f1906a724421.png)
+![Import dialog](docs/import-dialog.png "Import dialog")
 
-4. Hit submit.
+Any items (Advantages, Disadvantages, Special Abilities, Spells, Liturgies, and Equipment) that exist in the Library should be imported. There will be some exceptions, such as where Optolith and Foundry have slightly different names for the same thing.
 
-5. Wait a few minutes.
+Any items that cannot be imported from the Library will instead have a blank item added with only the correct name and source book(s). These will be noted in the results and will need to be configured manually.
 
-A Github Action will run to populate the `module.json` and `module.zip` with the correct urls that you can then use to distribute this release. You can check on its status in the "Actions" tab.
+The list of items which were not imported from the Library can be displayed with the following options:
+- **Show Popup**: Display the list in a dialog box once the character sheet has been created. Note: this currently sometimes appears *underneath* the character sheet
 
-![Actions Tab](https://user-images.githubusercontent.com/7644614/93409820-c1800780-f865-11ea-8c6b-c3792e35e0c8.png)
+  E.g. ![Results dialog](docs/results-dialog.png "Results dialog")
 
-6. Grab the module.json url from the release's details page.
+- **Add to Notes**: Adds the list to the Notes section of the character sheet.
 
-![image](https://user-images.githubusercontent.com/7644614/93409960-10c63800-f866-11ea-83f6-270cc5d10b71.png)
+Note: No matter which options are picked, the list of items which were not imported is output to the console (F12) as an array. Look for the following line followed by an array of items: `Optolith to Foundry Importer | Items that were not found in Library:`
 
-This `module.json` will only ever point at this release's `module.zip`, making it useful for sharing a specific version for compatibility purposes.
+## Rules modules ##
+Rules modules are availabe from Ulisses from the [German F-SHOP](https://www.f-shop.de/virtual-tabletops/) and soon to be from the [English F-SHOP](https://www.ulissesf-shop.com/)
 
-7. You can use the url `https://github.com/<user>/<repo>/releases/latest/download/module.json` to refer to the manifest.
+## Known issues
+- If you have more than one version of the same item (e.g. in an offical rules module and a custom module) then only the first one to be found will be added.
+- Some items don't have the exact same names in Optolith and Foundry and won't automatically import
+- AP Spent is not calculated. You will have to set this manually.
+- Some of the German UI translation is currently machine-generated. **Es tut mir leid, mein Deutsch ist nicht so gut!**
 
-This is the url you want to use to install the module typically, as it will get updated automatically.
-
-# How to List Your Releases on Package Admin
-
-To request a package listing for your first release, go to the [Package Submission Form](https://foundryvtt.com/packages/submit) (accessible via a link at the bottom of the "[Systems and Modules](https://foundryvtt.com/packages/)" page on the Foundry website).
-
-Fill in the form. "Package Name" must match the name in the module manifest.  Package Title will be the display name for the package.  Package URL should be your repo URL.
-![image](https://user-images.githubusercontent.com/36359784/120664263-b49e5500-c482-11eb-9126-af7006389903.png)
-
-
-One of the Foundry staff will typically get back to you with an approval or any further questions within a few days, and give you access to the package admin pages.
-
-Once you have access to the [module admin page](https://foundryvtt.com/admin/packages/package/), you can release a new version by going into the page for your module, scrolling to the bottom, and filling in a new Package Version.
-
-When listing a new version, Version should be the version number you set above, and the Manifest URL should be the manifest __for that specific version__ (do not use /latest/ here).
-![image](https://user-images.githubusercontent.com/36359784/120664346-c4b63480-c482-11eb-9d8b-731b50d70939.png)
-
-> ### :warning: Important :warning:
-> 
-> It is very important that you use the specific release manifest url, and not the `/latest` url here. For more details about why this is important and how Foundry Installs/Updates packages, read [this wiki article](https://foundryvtt.wiki/en/development/guides/releases-and-history).
-
-Clicking "Save" in the bottom right will save the new version, which means that anyone installing your module from within Foundry will get that version, and a post will be generated in the #release-announcements channel on the official Foundry VTT Discord.
-
-
-# FoundryVTT Module
-
-Does something, probably
-
-## Changelog
+## Future plans
+- Automatially set values for Mage/Priest Traditions to set correct AE/KP
+- Import stats for custom items created in Optolith
+- Assign correct category to items not imported from Compendium
+- Import avatar image if present in Optolith JSON file
+- Import pets/familiars
+- Better translation
+- Calculate AP Spent correctly

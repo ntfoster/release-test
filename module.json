@@ -1,51 +1,48 @@
 {
-  "id": "module",
-  "title": "New Module",
-  "description": "",
-  "version": "This is auto replaced",
-  "library": "false",
-  "manifestPlusVersion": "1.2.0",
-  "compatibility": {
-    "minimum": 10,
-    "verified": 10,
-    "maximum": 11
-  },
+  "id": "optolith-to-foundry",
+  "title": "Optolith to Foundry Importer",
+  "description": "A tool to import The Dark Eye/Das Schwarze Auge heroes created in Optolith (https://optolith.app/)",
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "Neil Foster",
+      "email": "ntfoster@gmail.com",
+      "discord": "GigaFuzz#7802"
     }
   ],
-  "relationships": {
-    "systems": [],
-    "requires": []
+  "version": "0.7.1",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.286"
   },
   "esmodules": [
-    "scripts/module.js"
+      "scripts/import.js"
   ],
-  "scripts": [
-    "scripts/lib/lib.js"
-  ],
-  "styles": [
-    "styles/module.css"
-  ],
+  "relationships": {
+    "systems": [{
+      "id": "dsa5",
+      "type": "system",
+      "manifest": "https://raw.githubusercontent.com/Plushtoast/dsa5-foundryVTT/foundry10/system.json",
+      "compatibility": {
+        "minimum": "4.0.0",
+        "verified": "4.1.6"
+      }
+    }]
+  },
   "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json"
-    }
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      },
+      {
+        "lang": "de",
+        "name": "Deutsch",
+        "path": "lang/de.json"
+      }
+
   ],
-  "url": "This is auto replaced",
-  "manifest": "This is auto replaced",
-  "download": "This is auto replaced",
-  "license": "LICENSE",
-  "readme": "README.md",
-  "media": [
-    {
-      "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
-    }
-  ]
+  "url": "https://github.com/ntfoster/optolith-to-foundry",
+  "manifest": "https://github.com/ntfoster/optolith-to-foundry/releases/latest/download/module.json",
+  "download": "https://github.com/ntfoster/optolith-to-foundry/releases/latest/download/optolith-to-foundry-0.7.1.zip",
+  "readme": "README.md"
 }
